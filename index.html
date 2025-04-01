@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⭕ PROTESTA #yosiquefelicito ⭕</title>
+    <style>
+        :root {
+            --primary-color: #ff4500;
+            --secondary-color: #4169e1;
+            --accent-color: #32cd32;
+            --background-color: #f8f9fa;
+            --text-color: #212529;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        .alert-banner {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.8; }
+            100% { opacity: 1; }
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+        
+        .message {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+        
+        .message strong {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .highlight {
+            background-color: yellow;
+            padding: 2px 5px;
+            font-weight: bold;
+        }
+        
+        .irish-flag {
+            display: inline-block;
+            margin: 0 5px;
+        }
+        
+        .form-container {
+            background-color: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        
+        .form-title {
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        
+        textarea {
+            height: 100px;
+            resize: vertical;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 4px;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+        
+        .btn:hover {
+            background-color: #228B22;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .signatures {
+            background-color: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .signatures-title {
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .counter {
+            background-color: var(--secondary-color);
+            color: white;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 10px;
+            font-weight: bold;
+        }
+        
+        .signature-list {
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #eee;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        
+        .signature-item {
+            border-bottom: 1px solid #eee;
+            padding: 10px 0;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .signature-item:last-child {
+            border-bottom: none;
+        }
+        
+        .name {
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+        
+        .message-text {
+            color: #666;
+            font-style: italic;
+            margin-top: 5px;
+        }
+        
+        .timestamp {
+            color: #999;
+            font-size: 0.8em;
+        }
+        
+        .confetti-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+        }
+        
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #f00;
+            border-radius: 0;
+        }
+        
+        .thank-you {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            z-index: 1000;
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .thank-you.show {
+            transform: translate(-50%, -50%) scale(1);
+        }
+        
+        .thank-you h2 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .thank-you p {
+            margin-bottom: 20px;
+        }
+        
+        .close-btn {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        .irish-colors {
+            display: inline-block;
+            padding: 2px 5px;
+            background: linear-gradient(to right, #009A49 33%, white 33%, white 66%, #FF7900 66%);
+            color: black;
+            font-weight: bold;
+            border-radius: 3px;
+        }
+        
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            
+            .message, .form-container, .signatures {
+                padding: 15px;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+        
+        #fireworks-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 999;
+        }
+    </style>
+</head>
+<body>
+    <div class="alert-banner">
+        ⭕ ATENCIÓN: PROTESTA EN CURSO ⭕
+    </div>
+    
+    <h1>Campaña #yosiquefelicito</h1>
+    
+    <div class="message">
+        <p>⭕ <strong>Atención</strong> ⭕</p>
+        <p>Se nos acaba, se nos acaba el chollo. El perro sanxe (en colaboración con otros órganos enemigos de la diversión) acaba de decretar <span class="highlight">ilegal</span> felicitar cumpleaños a partir de hoy 1 de abril de 2025.</p>
+        <p>La medida, ya entrada en vigor, ha sido recibida por la ciudadanía con desagrado y esta está mostrando su rechazo felicitando el cumpleaños a <strong>Jaime</strong> en un alarde de solidaridad y rebeldía colectiva.</p>
+        <p>Únete a la protesta firmando en el formulario de abajo ⬇️</p>
+        <p><strong>#yosiquefelicito</strong></p>
+        <p>El pueblo irlandés permanecerá ingobernable <span class="irish-colors">🍀🇮🇪✊</span></p>
+    </div>
+    
+    <div class="form-container">
+        <h2 class="form-title">Firma la protesta</h2>
+        <form id="protest-form">
+            <div class="form-group">
+                <label for="name">Tu nombre:</label>
+                <input type="text" id="name" name="name" required placeholder="Escribe tu nombre aquí">
+            </div>
+            <div class="form-group">
+                <label for="message">Mensaje de felicitación para Jaime (opcional):</label>
+                <textarea id="message" name="message" placeholder="Escribe un mensaje para Jaime..."></textarea>
+            </div>
+            <button type="submit" class="btn">¡Firmar la protesta!</button>
+        </form>
+    </div>
+    
+    <div class="signatures">
+        <div class="signatures-title">
+            <h2>Firmas de protesta</h2>
+            <div class="counter" id="signature-count">10</div>
+        </div>
+        <div class="signature-list" id="signature-list">
+            <!-- Las firmas se cargarán dinámicamente con JavaScript -->
+        </div>
+    </div>
+    
+    <div class="thank-you" id="thank-you">
+        <h2>¡Gracias por tu firma!</h2>
+        <p>Tu acto de rebeldía ha sido registrado. ¡Jaime agradece tu apoyo!</p>
+        <button class="close-btn" id="close-thank-you">Cerrar</button>
+    </div>
+    
+    <div class="confetti-container" id="confetti-container"></div>
+    <canvas id="fireworks-canvas"></canvas>
+    
+    <footer>
+        <p>© 2025 Movimiento de Resistencia por los Cumpleaños | Este sitio es una broma de cumpleaños para Jaime</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Datos iniciales de firmas
+            const initialSignatures = [
+                { name: "Nacho", message: "¡Feliz cumpleaños, Jaime! ¡Que la prohibición no te detenga!", timestamp: "2025-04-01 09:15" },
+                { name: "Joaquín", message: "En rebeldía y solidaridad. ¡Felicidades, crack!", timestamp: "2025-04-01 09:22" },
+                { name: "Martín", message: "Ni el gobierno puede detener mis felicitaciones. ¡Cumple feliz!", timestamp: "2025-04-01 09:30" },
+                { name: "Álvaro", message: "¡Feliz vuelta al sol! Resistencia siempre.", timestamp: "2025-04-01 09:45" },
+                { name: "Benet", message: "Más años, más sabiduría, y más resistencia contra las prohibiciones absurdas.", timestamp: "2025-04-01 10:05" },
+                { name: "Luis", message: "¡Que cumplas muchos más y que sigamos saltándonos las normas juntos!", timestamp: "2025-04-01 10:17" },
+                { name: "Pablo", message: "Para el mejor amigo, ni una ley injusta me impedirá felicitarte.", timestamp: "2025-04-01 10:28" },
+                { name: "David", message: "Un año más, un año mejor. ¡Felicidades en rebeldía!", timestamp: "2025-04-01 10:36" },
+                { name: "Raúl", message: "Si prohíben los cumpleaños, ¡prohibiremos las prohibiciones! ¡Feliz día!", timestamp: "2025-04-01 10:42" },
+                { name: "Alex", message: "¡La resistencia irlandesa te desea un cumpleaños inolvidable! 🍀", timestamp: "2025-04-01 10:55" },
+                { name: "Bono", message: "Prohibido prohibir cumpleaños. ¡Feliz día, máquina!", timestamp: "2025-04-01 11:03" }
+            ];
+            
+            // Inicializar firmas
+            let signatures = [...initialSignatures];
+            
+            // Renderizar firmas iniciales
+            renderSignatures();
+            
+            // Canvas para fuegos artificiales
+            const canvas = document.getElementById('fireworks-canvas');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            const ctx = canvas.getContext('2d');
+            
+            // Manejar el envío del formulario
+            const form = document.getElementById('protest-form');
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const nameInput = document.getElementById('name');
+                const messageInput = document.getElementById('message');
+                
+                // Validar que al menos hay un nombre
+                if (!nameInput.value.trim()) {
+                    alert('Por favor, introduce tu nombre para firmar la protesta.');
+                    return;
+                }
+                
+                // Crear nueva firma
+                const newSignature = {
+                    name: nameInput.value.trim(),
+                    message: messageInput.value.trim(),
+                    timestamp: getCurrentTimestamp()
+                };
+                
+                // Añadir al principio del array
+                signatures.unshift(newSignature);
+                
+                // Actualizar UI
+                renderSignatures();
+                updateCounter();
+                
+                // Mostrar agradecimiento
+                showThankYou();
+                
+                // Lanzar confeti y fuegos artificiales
+                createConfetti();
+                launchFireworks();
+                
+                // Limpiar formulario
+                form.reset();
+            });
+            
+            // Cerrar modal de agradecimiento
+            document.getElementById('close-thank-you').addEventListener('click', function() {
+                document.getElementById('thank-you').classList.remove('show');
+            });
+            
+            // Función para renderizar firmas
+            function renderSignatures() {
+                const signatureList = document.getElementById('signature-list');
+                signatureList.innerHTML = '';
+                
+                signatures.forEach(signature => {
+                    const signatureItem = document.createElement('div');
+                    signatureItem.classList.add('signature-item');
+                    
+                    const content = `
+                        <div>
+                            <div class="name">${escapeHTML(signature.name)}</div>
+                            ${signature.message ? `<div class="message-text">"${escapeHTML(signature.message)}"</div>` : ''}
+                        </div>
+                        <div class="timestamp">${signature.timestamp}</div>
+                    `;
+                    
+                    signatureItem.innerHTML = content;
+                    signatureList.appendChild(signatureItem);
+                });
+                
+                // Actualizar contador
+                updateCounter();
+            }
+            
+            // Función para escapar HTML y prevenir XSS
+            function escapeHTML(str) {
+                return str
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;')
+                    .replace(/'/g, '&#039;');
+            }
+            
+            // Función para obtener timestamp actual formateado
+            function getCurrentTimestamp() {
+                const now = new Date();
+                const year = now.getFullYear();
+                const month = String(now.getMonth() + 1).padStart(2, '0');
+                const day = String(now.getDate()).padStart(2, '0');
+                const hours = String(now.getHours()).padStart(2, '0');
+                const minutes = String(now.getMinutes()).padStart(2, '0');
+                
+                return `${year}-${month}-${day} ${hours}:${minutes}`;
+            }
+            
+            // Actualizar contador
+            function updateCounter() {
+                const counter = document.getElementById('signature-count');
+                counter.textContent = signatures.length;
+                
+                // Efecto de actualización
+                counter.style.transform = 'scale(1.3)';
+                setTimeout(() => {
+                    counter.style.transform = 'scale(1)';
+                }, 300);
+            }
+            
+            // Mostrar mensaje de agradecimiento
+            function showThankYou() {
+                const thankYou = document.getElementById('thank-you');
+                thankYou.classList.add('show');
+                
+                // Auto-cerrar después de 5 segundos
+                setTimeout(() => {
+                    thankYou.classList.remove('show');
+                }, 5000);
+            }
+            
+            // Función para crear confeti
+            function createConfetti() {
+                const confettiContainer = document.getElementById('confetti-container');
+                confettiContainer.innerHTML = '';
+                
+                const colors = ['#ff4500', '#4169e1', '#32cd32', '#ffd700', '#9932cc', '#ff69b4'];
+                
+                for (let i = 0; i < 100; i++) {
+                    const confetti = document.createElement('div');
+                    confetti.classList.add('confetti');
+                    
+                    // Propiedades aleatorias
+                    const color = colors[Math.floor(Math.random() * colors.length)];
+                    const left = Math.random() * 100 + 'vw';
+                    const animationDuration = Math.random() * 3 + 2 + 's';
+                    const size = Math.random() * 10 + 5 + 'px';
+                    
+                    // Forma aleatoria
+                    const shape = Math.random() > 0.5 ? '50%' : '0';
+                    
+                    // Aplicar estilos
+                    confetti.style.backgroundColor = color;
+                    confetti.style.left = left;
+                    confetti.style.width = size;
+                    confetti.style.height = size;
+                    confetti.style.borderRadius = shape;
+                    confetti.style.position = 'absolute';
+                    confetti.style.top = '-20px';
+                    confetti.style.opacity = Math.random();
+                    
+                    // Animación personalizada
+                    confetti.style.animation = `fall ${animationDuration} ease-in forwards`;
+                    
+                    // Añadir al contenedor
+                    confettiContainer.appendChild(confetti);
+                    
+                    // Crear animación de caída
+                    const keyframes = `
+                        @keyframes fall {
+                            0% {
+                                transform: translateY(0) rotate(0deg);
+                                opacity: ${Math.random()};
+                            }
+                            50% {
+                                transform: translateY(50vh) rotate(${Math.random() * 360}deg);
+                                opacity: ${Math.random()};
+                            }
+                            100% {
+                                transform: translateY(100vh) rotate(${Math.random() * 720}deg);
+                                opacity: 0;
+                            }
+                        }
+                    `;
+                    
+                    // Añadir keyframes al documento
+                    const style = document.createElement('style');
+                    style.innerHTML = keyframes;
+                    document.head.appendChild(style);
+                    
+                    // Eliminar después de la animación
+                    setTimeout(() => {
+                        confetti.remove();
+                        style.remove();
+                    }, parseFloat(animationDuration) * 1000);
+                }
+            }
+            
+            // Función para lanzar fuegos artificiales
+            function launchFireworks() {
+                const numFireworks = 5;
+                let activeFireworks = 0;
+                
+                for (let i = 0; i < numFireworks; i++) {
+                    setTimeout(() => {
+                        launchFirework();
+                        activeFireworks++;
+                        
+                        if (activeFireworks === numFireworks) {
+                            setTimeout(() => {
+                                // Limpiar canvas después de que terminen los fuegos artificiales
+                                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                            }, 2000);
+                        }
+                    }, i * 200);
+                }
+            }
+            
+            function launchFirework() {
+                const x = Math.random() * canvas.width;
+                const y = canvas.height;
+                const targetY = canvas.height * 0.3 + (Math.random() * canvas.height * 0.3);
+                
+                // Color del cohete
+                const rocketColor = '#fff';
+                
+                // Animación de subida del cohete
+                let currentY = y;
+                const rocketSpeed = 5;
+                
+                const rocketInterval = setInterval(() => {
+                    // Limpiar trazo anterior
+                    ctx.clearRect(x - 2, currentY, 4, 10);
+                    
+                    // Actualizar posición
+                    currentY -= rocketSpeed;
+                    
+                    // Dibujar cohete
+                    ctx.fillStyle = rocketColor;
+                    ctx.beginPath();
+                    ctx.arc(x, currentY, 2, 0, Math.PI * 2);
+                    ctx.fill();
+                    
+                    // Si llegó a su objetivo, explotar
+                    if (currentY <= targetY) {
+                        clearInterval(rocketInterval);
+                        explodeFirework(x, currentY);
+                    }
+                }, 10);
+            }
+            
+            function explodeFirework(x, y) {
+                const particles = [];
+                const numParticles = 50;
+                const colors = ['#ff4500', '#ffff00', '#00ff00', '#00ffff', '#0000ff', '#ff00ff'];
+                
+                // Crear partículas
+                for (let i = 0; i < numParticles; i++) {
+                    const angle = Math.random() * Math.PI * 2;
+                    const speed = 1 + Math.random() * 3;
+                    const size = 1 + Math.random() * 2;
+                    const color = colors[Math.floor(Math.random() * colors.length)];
+                    
+                    particles.push({
+                        x,
+                        y,
+                        vx: Math.cos(angle) * speed,
+                        vy: Math.sin(angle) * speed,
+                        size,
+                        color,
+                        alpha: 1
+                    });
+                }
+                
+                // Sonido de explosión
+                const frequencies = [400, 500, 600];
+                playFireworkSound(frequencies[Math.floor(Math.random() * frequencies.length)]);
+                
+                // Animar partículas
+                const explosionInterval = setInterval(() => {
+                    // Limpiar canvas
+                    ctx.clearRect(x - 100, y - 100, 200, 200);
+                    
+                    let allDead = true;
+                    
+                    // Actualizar y dibujar partículas
+                    particles.forEach(particle => {
+                        // Actualizar posición
+                        particle.x += particle.vx;
+                        particle.y += particle.vy;
+                        
+                        // Añadir gravedad
+                        particle.vy += 0.05;
+                        
+                        // Reducir alfa
+                        particle.alpha -= 0.01;
+                        
+                        if (particle.alpha > 0) {
+                            allDead = false;
+                            
+                            // Dibujar partícula
+                            ctx.globalAlpha = particle.alpha;
+                            ctx.fillStyle = particle.color;
+                            ctx.beginPath();
+                            ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+                            ctx.fill();
+                        }
+                    });
+                    
+                    // Restaurar alfa
+                    ctx.globalAlpha = 1;
+                    
+                    // Si todas las partículas han desaparecido, detener la animación
+                    if (allDead) {
+                        clearInterval(explosionInterval);
+                    }
+                }, 20);
+            }
+            
+            // Función para reproducir el sonido de fuegos artificiales
+            function playFireworkSound(frequency) {
+                try {
+                    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                    const oscillator = audioContext.createOscillator();
+                    const gainNode = audioContext.createGain();
+                    
+                    oscillator.type = 'sine';
+                    oscillator.frequency.value = frequency;
+                    gainNode.gain.value = 0.1;
+                    
+                    oscillator.connect(gainNode);
+                    gainNode.connect(audioContext.destination);
+                    
+                    oscillator.start();
+                    
+                    // Reducir volumen gradualmente
+                    gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.5);
+                    
+                    // Detener después de medio segundo
+                    setTimeout(() => {
+                        oscillator.stop();
+                    }, 500);
+                } catch (e) {
+                    // Silenciar errores de audio
+                    console.log('Audio not supported');
+                }
+            }
+            
+            // Hacer que el canvas de fuegos artificiales se ajuste al tamaño de la ventana
+            window.addEventListener('resize', function() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            });
+        });
+    </script>
+</body>
+</html>

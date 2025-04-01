@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,12 +11,29 @@
             --accent-color: #32cd32;
             --background-color: #f8f9fa;
             --text-color: #212529;
+            --alert-color: #dc3545;
+            --card-bg: white;
+            --card-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            --border-color: #eee;
+        }
+        
+        [data-theme="dark"] {
+            --primary-color: #ff6347;
+            --secondary-color: #6495ed;
+            --accent-color: #3cb371;
+            --background-color: #121212;
+            --text-color: #e0e0e0;
+            --alert-color: #ff4444;
+            --card-bg: #1e1e1e;
+            --card-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            --border-color: #333;
         }
         
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            transition: background-color 0.3s, color 0.3s;
         }
         
         body {
@@ -25,10 +42,14 @@
             background-color: var(--background-color);
             color: var(--text-color);
             padding: 20px;
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
             position: relative;
             overflow-x: hidden;
+        }
+        
+        .hidden {
+            display: none !important;
         }
         
         .alert-banner {
@@ -37,8 +58,80 @@
             text-align: center;
             padding: 10px;
             border-radius: 5px;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             animation: pulse 2s infinite;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .countdown-container {
+            background-color: var(--alert-color);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .countdown {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+        
+        .utility-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .utility-btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .utility-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .incognito-btn {
+            background-color: #888;
+            color: white;
+        }
+        
+        .dark-mode-btn {
+            background-color: #333;
+            color: white;
+        }
+        
+        .excuse-btn {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+        
+        .certificate-btn {
+            background-color: var(--accent-color);
+            color: white;
+        }
+        
+        .ip-check-btn {
+            background-color: var(--primary-color);
+            color: white;
         }
         
         @keyframes pulse {
@@ -54,11 +147,11 @@
         }
         
         .message {
-            background-color: white;
+            background-color: var(--card-bg);
             padding: 20px;
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            margin-bottom: 30px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 20px;
             font-size: 1.1em;
             line-height: 1.8;
         }
@@ -72,6 +165,7 @@
             background-color: yellow;
             padding: 2px 5px;
             font-weight: bold;
+            color: black;
         }
         
         .irish-flag {
@@ -79,12 +173,51 @@
             margin: 0 5px;
         }
         
+        .tab-container {
+            display: flex;
+            margin-bottom: 10px;
+        }
+        
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            background-color: #ddd;
+            border: 1px solid #ccc;
+            border-bottom: none;
+            border-radius: 5px 5px 0 0;
+            margin-right: 5px;
+        }
+        
+        .tab.active {
+            background-color: var(--card-bg);
+            border-bottom: 2px solid var(--primary-color);
+            font-weight: bold;
+        }
+        
+        [data-theme="dark"] .tab {
+            background-color: #333;
+            border-color: #444;
+        }
+        
+        [data-theme="dark"] .tab.active {
+            background-color: var(--card-bg);
+            border-bottom: 2px solid var(--primary-color);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
         .form-container {
-            background-color: white;
+            background-color: var(--card-bg);
             padding: 25px;
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            margin-bottom: 30px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 20px;
         }
         
         .form-title {
@@ -106,9 +239,11 @@
         input, textarea {
             width: 100%;
             padding: 10px;
-            border: 1px solid #ddd;
+            border: 1px solid var(--border-color);
             border-radius: 4px;
             font-size: 16px;
+            background-color: var(--card-bg);
+            color: var(--text-color);
         }
         
         textarea {
@@ -136,10 +271,11 @@
         }
         
         .signatures {
-            background-color: white;
+            background-color: var(--card-bg);
             padding: 25px;
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--card-shadow);
+            margin-bottom: 20px;
         }
         
         .signatures-title {
@@ -167,13 +303,13 @@
         .signature-list {
             max-height: 300px;
             overflow-y: auto;
-            border: 1px solid #eee;
+            border: 1px solid var(--border-color);
             padding: 10px;
             border-radius: 4px;
         }
         
         .signature-item {
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid var(--border-color);
             padding: 10px 0;
             display: flex;
             justify-content: space-between;
@@ -192,6 +328,10 @@
             color: #666;
             font-style: italic;
             margin-top: 5px;
+        }
+        
+        [data-theme="dark"] .message-text {
+            color: #aaa;
         }
         
         .timestamp {
@@ -217,30 +357,33 @@
             border-radius: 0;
         }
         
-        .thank-you {
+        .modal {
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%) scale(0);
-            background-color: rgba(255, 255, 255, 0.95);
+            background-color: var(--card-bg);
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
             text-align: center;
             z-index: 1000;
             transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            max-width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
         }
         
-        .thank-you.show {
+        .modal.show {
             transform: translate(-50%, -50%) scale(1);
         }
         
-        .thank-you h2 {
+        .modal h2 {
             color: var(--primary-color);
             margin-bottom: 10px;
         }
         
-        .thank-you p {
+        .modal p {
             margin-bottom: 20px;
         }
         
@@ -260,6 +403,10 @@
             font-size: 0.9em;
         }
         
+        [data-theme="dark"] footer {
+            color: #aaa;
+        }
+        
         .irish-colors {
             display: inline-block;
             padding: 2px 5px;
@@ -269,6 +416,359 @@
             border-radius: 3px;
         }
         
+        #fireworks-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 999;
+        }
+        
+        /* Mapa interactivo */
+        .map-container {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBkPSJNMjM1LDMyYzE0LjQsMCwyNSwxMS4xLDI3LjMsMjNIMTU1LjhMMTYwLDQ4QzE2OS42LDM4LjQsMTgzLjQsMzIsMTk5LDMySDIzNXogTTEyMS43LDcyaDE0Ni40bC0xNS44LDU1LjNjLTEuMiw0LjItNS4xLDcuMS05LjUsNy4xaC05OC43Yy00LjQsMC04LjMtMi45LTkuNS03LjFMMTIxLjcsNzJ6IE0zNiwzMTkuOVYzNjIuMWExNiwxNiAwIDAgMCAxNiwxNmgyNzJhMTYsMTYgMCAwIDAgMTYtMTZ2LTQyLjFhMTYsMTYgMCAwIDAtMTYtMTZINTJBMTYsMTYgMCAwIDAgMzYsMzE5Ljl6IiBmaWxsPSIjZjVmNWY1Ii8+PHBhdGggZD0iTTEyNiwyODhoOTZjNi42LDAsMTItNS40LDEyLTEydi00MGMwLTYuNi01LjQtMTItMTItMTJoLTk2Yy02LjYsMC0xMiw1LjQtMTIsMTJ2NDBDMTE0LDI4Mi42LDExOS40LDI4OCwxMjYsMjg4eiIgZmlsbD0iI2Y1ZjVmNSIvPjxwYXRoIGQ9Ik0zNzYsMTQ0YzAtOC44LTcuMi0xNi0xNi0xNkgxNTJjLTguOCwwLTE2LDcuMi0xNiwxNnYxNmMwLDguOCw3LjIsMTYsMTYsMTZoMjA4YzguOCwwLDE2LTcuMiwxNi0xNlYxNDR6IiBmaWxsPSIjZjVmNWY1Ii8+PC9zdmc+');
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin-bottom: 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .map-dot {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            animation: pulse-dot 1.5s infinite;
+        }
+        
+        @keyframes pulse-dot {
+            0% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.5);
+                opacity: 0.7;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+        }
+        
+        /* Se Busca sección */
+        .wanted-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .wanted-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .wanted-header {
+            background-color: var(--alert-color);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        
+        .wanted-img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            background-color: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            color: #888;
+        }
+        
+        .wanted-info {
+            padding: 15px;
+        }
+        
+        .wanted-name {
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 5px;
+        }
+        
+        .wanted-crime {
+            font-style: italic;
+            margin-bottom: 10px;
+            color: #666;
+        }
+        
+        [data-theme="dark"] .wanted-crime {
+            color: #aaa;
+        }
+        
+        .wanted-reward {
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+        
+        /* Galería de acciones previas */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .gallery-item {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+        }
+        
+        .gallery-img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            background-color: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: #888;
+        }
+        
+        .gallery-caption {
+            padding: 10px;
+            font-size: 0.9em;
+            text-align: center;
+            font-style: italic;
+        }
+        
+        /* Verificador de IP */
+        .ip-check {
+            padding: 20px;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 20px;
+        }
+        
+        .ip-status {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+        
+        .status-icon {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        
+        .status-icon.checking {
+            background-color: #ffbf00;
+            animation: pulse 1s infinite;
+        }
+        
+        .status-icon.secure {
+            background-color: #00bf00;
+        }
+        
+        .loading-bar {
+            height: 10px;
+            width: 100%;
+            background-color: #ddd;
+            border-radius: 5px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+        
+        .loading-progress {
+            height: 100%;
+            width: 0%;
+            background-color: var(--secondary-color);
+            transition: width 0.5s ease;
+        }
+        
+        /* Certificado de rebeldía */
+        .certificate-container {
+            position: relative;
+            background-color: var(--card-bg);
+            border: 10px solid #f5ca7a;
+            padding: 40px;
+            width: 100%;
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+            font-family: 'Times New Roman', Times, serif;
+        }
+        
+        .certificate-header {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #8b4513;
+        }
+        
+        .certificate-title {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 30px;
+            color: #8b4513;
+        }
+        
+        .certificate-body {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .certificate-name {
+            font-size: 1.8em;
+            font-weight: bold;
+            margin: 20px 0;
+            color: #8b4513;
+            border-bottom: 2px solid #8b4513;
+            display: inline-block;
+            padding: 0 20px 5px;
+        }
+        
+        .certificate-footer {
+            margin-top: 40px;
+            display: flex;
+            justify-content: space-around;
+        }
+        
+        .certificate-seal {
+            width: 100px;
+            height: 100px;
+            border: 2px solid #8b4513;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            color: #8b4513;
+            transform: rotate(-15deg);
+        }
+        
+        .certificate-signature {
+            font-family: 'Brush Script MT', cursive;
+            font-size: 1.5em;
+            margin-top: 20px;
+            color: #555;
+        }
+        
+        .certificate-watermark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-30deg);
+            font-size: 8em;
+            opacity: 0.03;
+            color: #000;
+            white-space: nowrap;
+            pointer-events: none;
+        }
+        
+        /* Página de recetas (modo incógnito) */
+        .recipe-page {
+            background-color: var(--card-bg);
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            font-family: 'Georgia', serif;
+        }
+        
+        .recipe-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .recipe-title {
+            font-size: 2em;
+            color: #5a8f3a;
+            margin-bottom: 10px;
+        }
+        
+        .recipe-meta {
+            color: #777;
+            font-style: italic;
+        }
+        
+        .recipe-img {
+            width: 100%;
+            height: 300px;
+            background-color: #eee;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            color: #888;
+        }
+        
+        .recipe-section {
+            margin-bottom: 30px;
+        }
+        
+        .recipe-section h3 {
+            border-bottom: 2px solid #5a8f3a;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+            color: #5a8f3a;
+        }
+        
+        .ingredients-list li, .instructions-list li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        
+        .instructions-list {
+            counter-reset: instructions;
+        }
+        
+        .instructions-list li {
+            position: relative;
+            padding-left: 40px;
+            margin-bottom: 15px;
+        }
+        
+        .instructions-list li::before {
+            counter-increment: instructions;
+            content: counter(instructions);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background-color: #5a8f3a;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        /* Estilos de pantalla pequeña */
         @media (max-width: 600px) {
             body {
                 padding: 10px;
@@ -281,73 +781,252 @@
             .btn {
                 width: 100%;
             }
-        }
-        
-        #fireworks-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-            z-index: 999;
+            
+            .certificate-container {
+                padding: 20px;
+            }
+            
+            .certificate-title {
+                font-size: 1.8em;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="alert-banner">
-        ⭕ ATENCIÓN: PROTESTA EN CURSO ⭕
-    </div>
-    
-    <h1>Campaña #yosiquefelicito</h1>
-    
-    <div class="message">
-        <p>⭕ <strong>Atención</strong> ⭕</p>
-        <p>Se nos acaba, se nos acaba el chollo. El perro sanxe (en colaboración con otros órganos enemigos de la diversión) acaba de decretar <span class="highlight">ilegal</span> felicitar cumpleaños a partir de hoy 1 de abril de 2025.</p>
-        <p>La medida, ya entrada en vigor, ha sido recibida por la ciudadanía con desagrado y esta está mostrando su rechazo felicitando el cumpleaños a <strong>Jaime</strong> en un alarde de solidaridad y rebeldía colectiva.</p>
-        <p>Únete a la protesta firmando en el formulario de abajo ⬇️</p>
-        <p><strong>#yosiquefelicito</strong></p>
-        <p>El pueblo irlandés permanecerá ingobernable <span class="irish-colors">🍀🇮🇪✊</span></p>
-    </div>
-    
-    <div class="form-container">
-        <h2 class="form-title">Firma la protesta</h2>
-        <form id="protest-form">
-            <div class="form-group">
-                <label for="name">Tu nombre:</label>
-                <input type="text" id="name" name="name" required placeholder="Escribe tu nombre aquí">
-            </div>
-            <div class="form-group">
-                <label for="message">Mensaje de felicitación para Jaime (opcional):</label>
-                <textarea id="message" name="message" placeholder="Escribe un mensaje para Jaime..."></textarea>
-            </div>
-            <button type="submit" class="btn">¡Firmar la protesta!</button>
-        </form>
-    </div>
-    
-    <div class="signatures">
-        <div class="signatures-title">
-            <h2>Firmas de protesta</h2>
-            <div class="counter" id="signature-count">10</div>
+    <!-- Página normal (protesta) -->
+    <div id="protest-page">
+        <div class="alert-banner">
+            <span>⭕ ATENCIÓN: PROTESTA EN CURSO ⭕</span>
+            <span id="clock">19:45</span>
         </div>
-        <div class="signature-list" id="signature-list">
-            <!-- Las firmas se cargarán dinámicamente con JavaScript -->
+        
+        <div class="countdown-container">
+            <div>⚠️ TIEMPO RESTANTE ANTES DE QUE LAS AUTORIDADES RASTREEN ESTA WEB ⚠️</div>
+            <div class="countdown" id="countdown">05:00</div>
+        </div>
+        
+        <div class="utility-buttons">
+            <button class="utility-btn incognito-btn" id="incognito-btn">
+                <span>🥸</span> Modo Incógnito
+            </button>
+            <button class="utility-btn dark-mode-btn" id="dark-mode-btn">
+                <span>🌙</span> Modo Nocturno
+            </button>
+            <button class="utility-btn excuse-btn" id="excuse-btn">
+                <span>🗣️</span> Generar Excusa
+            </button>
+            <button class="utility-btn certificate-btn" id="certificate-btn">
+                <span>📜</span> Certificado Rebelde
+            </button>
+            <button class="utility-btn ip-check-btn" id="ip-check-btn">
+                <span>🔒</span> Verificar Conexión
+            </button>
+        </div>
+        
+        <h1>Campaña #yosiquefelicito</h1>
+        
+        <div class="message">
+            <p>⭕ <strong>Atención</strong> ⭕</p>
+            <p>Se nos acaba, se nos acaba el chollo. El perro sanxe (en colaboración con otros órganos enemigos de la diversión) acaba de decretar <span class="highlight">ilegal</span> felicitar cumpleaños a partir de hoy 1 de abril de 2025.</p>
+            <p>La medida, ya entrada en vigor, ha sido recibida por la ciudadanía con desagrado y esta está mostrando su rechazo felicitando el cumpleaños a <strong>Jaime</strong> en un alarde de solidaridad y rebeldía colectiva.</p>
+            <p>Únete a la protesta firmando en el formulario de abajo ⬇️</p>
+            <p><strong>#yosiquefelicito</strong></p>
+            <p>El pueblo irlandés permanecerá ingobernable <span class="irish-colors">🍀🇮🇪✊</span></p>
+        </div>
+        
+        <div class="tab-container">
+            <div class="tab active" data-tab="firmar">Firmar Protesta</div>
+            <div class="tab" data-tab="mapa">Mapa de Resistencia</div>
+            <div class="tab" data-tab="buscados">Se Busca</div>
+            <div class="tab" data-tab="galeria">Acciones Previas</div>
+        </div>
+        
+        <div class="tab-content active" id="firmar-tab">
+            <div class="form-container">
+                <h2 class="form-title">Firma la protesta</h2>
+                <form id="protest-form">
+                    <div class="form-group">
+                        <label for="name">Tu nombre:</label>
+                        <input type="text" id="name" name="name" required placeholder="Escribe tu nombre aquí">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Mensaje de felicitación para Jaime (opcional):</label>
+                        <textarea id="message" name="message" placeholder="Escribe un mensaje para Jaime..."></textarea>
+                    </div>
+                    <button type="submit" class="btn">¡Firmar la protesta!</button>
+                </form>
+            </div>
+            
+            <div class="signatures">
+                <div class="signatures-title">
+                    <h2>Firmas de protesta</h2>
+                    <div class="counter" id="signature-count">11</div>
+                </div>
+                <div class="signature-list" id="signature-list">
+                    <!-- Las firmas se cargarán dinámicamente con JavaScript -->
+                </div>
+            </div>
+        </div>
+        
+        <div class="tab-content" id="mapa-tab">
+            <div class="form-container">
+                <h2 class="form-title">Mapa nacional de la resistencia</h2>
+                <p style="margin-bottom: 15px;">La revolución contra la prohibición de cumpleaños está extendiéndose por toda España. Estos son los focos más activos de la resistencia:</p>
+                
+                <div class="map-container" id="resistance-map">
+                    <!-- Los puntos serán generados por JavaScript -->
+                </div>
+                
+                <div style="display: flex; justify-content: space-between; margin-top: 10px;">
+                    <div>
+                        <span style="color: var(--primary-color);">●</span> Focos activos
+                    </div>
+                    <div>
+                        <strong>Rebeldes activos:</strong> <span id="rebels-count">1,247</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="tab-content" id="buscados-tab">
+            <div class="form-container">
+                <h2 class="form-title">Se Busca: Rebeldes de los Cumpleaños</h2>
+                <p style="margin-bottom: 15px;">Los siguientes individuos han sido sorprendidos felicitando cumpleaños a pesar de la prohibición nacional. Se ofrecen recompensas por información sobre su paradero.</p>
+                
+                <div class="wanted-grid" id="wanted-grid">
+                    <!-- Las tarjetas se generarán con JavaScript -->
+                </div>
+            </div>
+        </div>
+        
+        <div class="tab-content" id="galeria-tab">
+            <div class="form-container">
+                <h2 class="form-title">Acciones clandestinas de felicitación</h2>
+                <p style="margin-bottom: 15px;">Documentación de protestas previas y actos de desobediencia civil relacionados con la felicitación de cumpleaños:</p>
+                
+                <div class="gallery" id="rebellion-gallery">
+                    <!-- La galería se generará con JavaScript -->
+                </div>
+            </div>
+        </div>
+        
+        <div class="modal" id="thank-you">
+            <h2>¡Gracias por tu firma!</h2>
+            <p>Tu acto de rebeldía ha sido registrado. ¡Jaime agradece tu apoyo!</p>
+            <button class="close-btn" id="close-thank-you">Cerrar</button>
+        </div>
+        
+        <div class="modal" id="excuse-modal">
+            <h2>Excusa generada por si te atrapan</h2>
+            <p id="excuse-text">No estaba felicitando un cumpleaños, estaba... [excusa]</p>
+            <button class="close-btn" id="generate-new-excuse">Generar otra excusa</button>
+            <button class="close-btn" id="close-excuse-modal" style="margin-left: 10px;">Cerrar</button>
+        </div>
+        
+        <div class="modal" id="ip-modal">
+            <h2>Verificando seguridad de conexión</h2>
+            <div class="ip-status">
+                <div class="status-icon checking" id="status-icon"></div>
+                <div id="ip-status-text">Comprobando si tu conexión es segura...</div>
+            </div>
+            <div class="loading-bar">
+                <div class="loading-progress" id="ip-progress"></div>
+            </div>
+            <p id="ip-details" style="margin-top: 20px; font-size: 0.9em; color: #666;"></p>
+            <button class="close-btn hidden" id="close-ip-modal">Cerrar</button>
+        </div>
+        
+        <div class="modal" id="certificate-modal">
+            <div class="certificate-container">
+                <div class="certificate-watermark">REBELDE</div>
+                <div class="certificate-header">República Independiente del Cumpleaños</div>
+                <div class="certificate-title">Certificado de Rebeldía</div>
+                <div class="certificate-body">
+                    Por la presente se certifica que:
+                </div>
+                <div class="certificate-name" id="certificate-name">NOMBRE DEL REBELDE</div>
+                <div class="certificate-body">
+                    Ha demostrado un extraordinario valor al desafiar la prohibición gubernamental
+                    de felicitar cumpleaños, y se le reconoce oficialmente como miembro de
+                    la resistencia por la libertad de celebración.
+                </div>
+                <div class="certificate-footer">
+                    <div>
+                        <div class="certificate-seal">OFICIAL</div>
+                    </div>
+                    <div>
+                        <div class="certificate-signature">La Resistencia</div>
+                        <div>1 de abril de 2025</div>
+                    </div>
+                </div>
+            </div>
+            <button class="close-btn" id="download-certificate" style="margin-top: 20px; margin-right: 10px;">Descargar</button>
+            <button class="close-btn" id="close-certificate-modal" style="margin-top: 20px;">Cerrar</button>
+        </div>
+        
+        <div class="confetti-container" id="confetti-container"></div>
+        <canvas id="fireworks-canvas"></canvas>
+        
+        <footer>
+            <p>© 2025 Movimiento de Resistencia por los Cumpleaños | Este sitio es una broma de cumpleaños para Jaime</p>
+            <p><small>Pulsa <span style="font-family: monospace;">Alt+R</span> para volver a la protesta desde el modo incógnito</small></p>
+        </footer>
+    </div>
+    
+    <!-- Página de recetas (modo incógnito) -->
+    <div id="recipe-page" class="recipe-page hidden">
+        <div class="recipe-header">
+            <h1 class="recipe-title">Receta de Tortilla de Patatas Tradicional</h1>
+            <div class="recipe-meta">Publicado el 1 de abril de 2025 | Tiempo de preparación: 45 minutos</div>
+        </div>
+        
+        <div class="recipe-img">
+            [Imagen de una deliciosa tortilla de patatas]
+        </div>
+        
+        <div class="recipe-section">
+            <h3>Ingredientes</h3>
+            <ul class="ingredients-list">
+                <li>6 huevos grandes</li>
+                <li>1 kg de patatas</li>
+                <li>1 cebolla grande (opcional)</li>
+                <li>200 ml de aceite de oliva virgen extra</li>
+                <li>Sal al gusto</li>
+            </ul>
+        </div>
+        
+        <div class="recipe-section">
+            <h3>Instrucciones</h3>
+            <ol class="instructions-list">
+                <li>Pelar y cortar las patatas en rodajas finas, aproximadamente de 0.5 cm de grosor.</li>
+                <li>Pelar y cortar la cebolla en juliana fina (si la usas).</li>
+                <li>Calentar el aceite en una sartén grande a fuego medio-bajo.</li>
+                <li>Añadir las patatas y la cebolla, y cocinar a fuego lento durante unos 25-30 minutos, removiendo ocasionalmente con cuidado para no romper las patatas.</li>
+                <li>Mientras tanto, batir los huevos en un bol grande y sazonar con sal.</li>
+                <li>Cuando las patatas estén tiernas (no crujientes ni doradas), escurrirlas del aceite y añadirlas a los huevos batidos.</li>
+                <li>Dejar reposar la mezcla durante 5 minutos para que los sabores se integren.</li>
+                <li>Calentar 2 cucharadas del aceite usado en una sartén antiadherente a fuego medio.</li>
+                <li>Verter la mezcla en la sartén y cocinar durante unos 3-4 minutos, moviendo la sartén ocasionalmente para evitar que se pegue.</li>
+                <li>Cuando el borde esté cuajado pero el centro aún esté líquido, colocar un plato grande sobre la sartén y darle la vuelta rápidamente.</li>
+                <li>Deslizar la tortilla de nuevo en la sartén con el lado crudo hacia abajo y cocinar otros 3-4 minutos.</li>
+                <li>Repetir el proceso de voltear la tortilla 1-2 veces más para lograr una forma redonda perfecta.</li>
+                <li>Servir caliente o a temperatura ambiente, cortada en cuñas.</li>
+            </ol>
+        </div>
+        
+        <div class="recipe-section">
+            <h3>Consejos</h3>
+            <p>Para una tortilla más jugosa, reducir ligeramente el tiempo de cocción. Si prefieres que esté más cuajada, cocínala un poco más por cada lado. La tortilla española es perfecta para servir como tapa, en un bocadillo o como plato principal acompañada de una ensalada verde.</p>
         </div>
     </div>
-    
-    <div class="thank-you" id="thank-you">
-        <h2>¡Gracias por tu firma!</h2>
-        <p>Tu acto de rebeldía ha sido registrado. ¡Jaime agradece tu apoyo!</p>
-        <button class="close-btn" id="close-thank-you">Cerrar</button>
-    </div>
-    
-    <div class="confetti-container" id="confetti-container"></div>
-    <canvas id="fireworks-canvas"></canvas>
-    
-    <footer>
-        <p>© 2025 Movimiento de Resistencia por los Cumpleaños | Este sitio es una broma de cumpleaños para Jaime</p>
-    </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Variables globales
+            let isDarkMode = false;
+            const protestPage = document.getElementById('protest-page');
+            const recipePage = document.getElementById('recipe-page');
+            
             // Datos iniciales de firmas
             const initialSignatures = [
                 { name: "Nacho", message: "¡Feliz cumpleaños, Jaime! ¡Que la prohibición no te detenga!", timestamp: "2025-04-01 09:15" },
@@ -369,13 +1048,46 @@
             // Renderizar firmas iniciales
             renderSignatures();
             
+            // Inicializar mapa de resistencia
+            initResistanceMap();
+            
+            // Inicializar tarjetas de buscados
+            initWantedPosters();
+            
+            // Inicializar galería de rebelión
+            initRebellionGallery();
+            
+            // Inicializar reloj
+            updateClock();
+            setInterval(updateClock, 60000);
+            
+            // Inicializar cuenta regresiva
+            let countdownTime = 5 * 60; // 5 minutos en segundos
+            const countdownInterval = setInterval(updateCountdown, 1000);
+            updateCountdown();
+            
             // Canvas para fuegos artificiales
             const canvas = document.getElementById('fireworks-canvas');
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
             const ctx = canvas.getContext('2d');
             
-            // Manejar el envío del formulario
+            // Manejadores de eventos para pestañas
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const tabId = this.getAttribute('data-tab');
+                    
+                    // Activar pestaña
+                    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Mostrar contenido
+                    document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+                    document.getElementById(`${tabId}-tab`).classList.add('active');
+                });
+            });
+            
+            // Manejar envío del formulario
             const form = document.getElementById('protest-form');
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
@@ -412,6 +1124,49 @@
                 
                 // Limpiar formulario
                 form.reset();
+                
+                // Añadir punto al mapa
+                addMapDot();
+                
+                // Actualizar contador de rebeldes
+                updateRebelsCount();
+            });
+            
+            // Botón modo oscuro
+            document.getElementById('dark-mode-btn').addEventListener('click', toggleDarkMode);
+            
+            // Botón modo incógnito
+            document.getElementById('incognito-btn').addEventListener('click', toggleIncognitoMode);
+            
+            // Escuchar Alt+R para volver de modo incógnito
+            document.addEventListener('keydown', function(e) {
+                if (e.altKey && e.key === 'r') {
+                    if (protestPage.classList.contains('hidden')) {
+                        toggleIncognitoMode();
+                    }
+                }
+            });
+            
+            // Botón generador de excusas
+            document.getElementById('excuse-btn').addEventListener('click', showExcuseGenerator);
+            document.getElementById('generate-new-excuse').addEventListener('click', generateExcuse);
+            document.getElementById('close-excuse-modal').addEventListener('click', function() {
+                document.getElementById('excuse-modal').classList.remove('show');
+            });
+            
+            // Botón verificar IP
+            document.getElementById('ip-check-btn').addEventListener('click', checkIPSecurity);
+            document.getElementById('close-ip-modal').addEventListener('click', function() {
+                document.getElementById('ip-modal').classList.remove('show');
+            });
+            
+            // Botón certificado
+            document.getElementById('certificate-btn').addEventListener('click', showCertificate);
+            document.getElementById('close-certificate-modal').addEventListener('click', function() {
+                document.getElementById('certificate-modal').classList.remove('show');
+            });
+            document.getElementById('download-certificate').addEventListener('click', function() {
+                alert('¡Certificado descargado! (En una implementación real, generaría un PDF o imagen del certificado)');
             });
             
             // Cerrar modal de agradecimiento
@@ -704,6 +1459,279 @@
                     // Silenciar errores de audio
                     console.log('Audio not supported');
                 }
+            }
+            
+            // Inicializar mapa de resistencia
+            function initResistanceMap() {
+                const map = document.getElementById('resistance-map');
+                
+                // Puntos iniciales en el mapa (coordenadas relativas: 0-100%)
+                const initialDots = [
+                    { x: 25, y: 20 },  // Norte
+                    { x: 85, y: 15 },  // Noreste
+                    { x: 15, y: 65 },  // Oeste
+                    { x: 60, y: 90 },  // Sur
+                    { x: 50, y: 50 },  // Centro
+                    { x: 90, y: 70 }   // Este
+                ];
+                
+                // Crear puntos iniciales
+                initialDots.forEach(dot => {
+                    createMapDot(dot.x, dot.y);
+                });
+                
+                // Animar puntos aleatorios cada 3-7 segundos
+                setInterval(() => {
+                    const randomDot = initialDots[Math.floor(Math.random() * initialDots.length)];
+                    // Añadir variación aleatoria
+                    const x = randomDot.x + (Math.random() * 10 - 5);
+                    const y = randomDot.y + (Math.random() * 10 - 5);
+                    createMapDot(x, y);
+                }, Math.random() * 4000 + 3000);
+            }
+            
+            // Crear un punto en el mapa
+            function createMapDot(x, y) {
+                const map = document.getElementById('resistance-map');
+                const dot = document.createElement('div');
+                dot.classList.add('map-dot');
+                dot.style.left = `${x}%`;
+                dot.style.top = `${y}%`;
+                map.appendChild(dot);
+                
+                // Eliminar después de la animación
+                setTimeout(() => {
+                    dot.remove();
+                }, 3000);
+            }
+            
+            // Añadir un punto aleatorio al mapa
+            function addMapDot() {
+                const x = 10 + Math.random() * 80; // 10-90%
+                const y = 10 + Math.random() * 80; // 10-90%
+                createMapDot(x, y);
+            }
+            
+            // Actualizar contador de rebeldes
+            function updateRebelsCount() {
+                const rebelsCount = document.getElementById('rebels-count');
+                const currentCount = parseInt(rebelsCount.textContent.replace(',', ''));
+                const newCount = currentCount + Math.floor(Math.random() * 10) + 1;
+                rebelsCount.textContent = newCount.toLocaleString();
+                
+                // Efecto de actualización
+                rebelsCount.style.color = 'var(--primary-color)';
+                rebelsCount.style.fontWeight = 'bold';
+                setTimeout(() => {
+                    rebelsCount.style.color = '';
+                    rebelsCount.style.fontWeight = '';
+                }, 1000);
+            }
+            
+            // Inicializar tarjetas de buscados
+            function initWantedPosters() {
+                const wantedGrid = document.getElementById('wanted-grid');
+                const wantedData = [
+                    { name: "El Pastelero", crime: "Distribución de tartas de cumpleaños", reward: "500€" },
+                    { name: "La Vocalista", crime: "Cantar 'Cumpleaños Feliz' en público", reward: "750€" },
+                    { name: "El Decorador", crime: "Colgar guirnaldas y globos", reward: "300€" },
+                    { name: "El Cartero", crime: "Reparto de tarjetas de felicitación", reward: "600€" },
+                    { name: "El Fotógrafo", crime: "Documentar celebraciones clandestinas", reward: "450€" },
+                    { name: "La Regaladora", crime: "Entrega de paquetes sospechosos", reward: "800€" }
+                ];
+                
+                wantedData.forEach(wanted => {
+                    const card = document.createElement('div');
+                    card.classList.add('wanted-card');
+                    
+                    card.innerHTML = `
+                        <div class="wanted-header">Se Busca</div>
+                        <div class="wanted-img">👤</div>
+                        <div class="wanted-info">
+                            <div class="wanted-name">${wanted.name}</div>
+                            <div class="wanted-crime">Delito: ${wanted.crime}</div>
+                            <div class="wanted-reward">Recompensa: ${wanted.reward}</div>
+                        </div>
+                    `;
+                    
+                    wantedGrid.appendChild(card);
+                });
+            }
+            
+            // Inicializar galería de rebelión
+            function initRebellionGallery() {
+                const gallery = document.getElementById('rebellion-gallery');
+                const galleryData = [
+                    { caption: "Fiesta clandestina en Madrid (Marzo 2025)" },
+                    { caption: "Intercambio ilegal de regalos en Barcelona" },
+                    { caption: "Taller subterráneo de fabricación de tartas" },
+                    { caption: "Almacén secreto de velas de cumpleaños" },
+                    { caption: "Reunión de la resistencia en Valencia" },
+                    { caption: "Transporte encubierto de globos y serpentinas" }
+                ];
+                
+                galleryData.forEach(item => {
+                    const galleryItem = document.createElement('div');
+                    galleryItem.classList.add('gallery-item');
+                    
+                    galleryItem.innerHTML = `
+                        <div class="gallery-img">📷</div>
+                        <div class="gallery-caption">${item.caption}</div>
+                    `;
+                    
+                    gallery.appendChild(galleryItem);
+                });
+            }
+            
+            // Actualizar reloj
+            function updateClock() {
+                const clock = document.getElementById('clock');
+                const now = new Date();
+                const hours = String(now.getHours()).padStart(2, '0');
+                const minutes = String(now.getMinutes()).padStart(2, '0');
+                clock.textContent = `${hours}:${minutes}`;
+            }
+            
+            // Actualizar cuenta regresiva
+            function updateCountdown() {
+                const countdown = document.getElementById('countdown');
+                
+                if (countdownTime <= 0) {
+                    clearInterval(countdownInterval);
+                    countdown.textContent = "¡CONEXIÓN SEGURA ESTABLECIDA!";
+                    countdown.style.color = "#00ff00";
+                    return;
+                }
+                
+                const minutes = Math.floor(countdownTime / 60);
+                const seconds = countdownTime % 60;
+                
+                countdown.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+                
+                // Efecto de urgencia cuando queda poco tiempo
+                if (countdownTime < 60) {
+                    countdown.style.color = "#ff0000";
+                } else if (countdownTime < 120) {
+                    countdown.style.color = "#ff8800";
+                }
+                
+                countdownTime--;
+            }
+            
+            // Alternar modo oscuro
+            function toggleDarkMode() {
+                isDarkMode = !isDarkMode;
+                document.documentElement.setAttribute('data-theme', isDarkMode ? 'dark' : 'light');
+                
+                // Cambiar texto del botón
+                const darkModeBtn = document.getElementById('dark-mode-btn');
+                if (isDarkMode) {
+                    darkModeBtn.innerHTML = '<span>☀️</span> Modo Diurno';
+                } else {
+                    darkModeBtn.innerHTML = '<span>🌙</span> Modo Nocturno';
+                }
+            }
+            
+            // Alternar modo incógnito
+            function toggleIncognitoMode() {
+                if (protestPage.classList.contains('hidden')) {
+                    // Volver al modo normal
+                    protestPage.classList.remove('hidden');
+                    recipePage.classList.add('hidden');
+                } else {
+                    // Activar modo incógnito
+                    protestPage.classList.add('hidden');
+                    recipePage.classList.remove('hidden');
+                }
+            }
+            
+            // Mostrar generador de excusas
+            function showExcuseGenerator() {
+                const excuseModal = document.getElementById('excuse-modal');
+                excuseModal.classList.add('show');
+                generateExcuse();
+            }
+            
+            // Generar excusa
+            function generateExcuse() {
+                const excuses = [
+                    "No estaba felicitando un cumpleaños, estaba realizando un estudio sociológico sobre rituales anuales.",
+                    "Esto no es una felicitación, es una conmemoración de la rotación terrestre desde el nacimiento del sujeto.",
+                    "Solo estaba midiendo el impacto emocional de ciertas frases en días específicos del calendario.",
+                    "En realidad estaba practicando mi pronunciación en un nuevo idioma donde 'feliz cumpleaños' significa 'buen día normal'.",
+                    "Estaba recitando un poema que casualmente contiene palabras que pueden malinterpretarse como felicitación.",
+                    "Esto es parte de un experimento psicológico autorizado por el Ministerio de Ciencia.",
+                    "No es una felicitación, es una expresión de alivio por la supervivencia continuada del individuo.",
+                    "Estaba probando la acústica de la sala con frases aleatorias.",
+                    "Solo estaba comentando la coincidencia estadística entre hoy y cierto evento histórico.",
+                    "Es un ejercicio de dicción recomendado por mi logopeda."
+                ];
+                
+                const excuseText = document.getElementById('excuse-text');
+                excuseText.textContent = excuses[Math.floor(Math.random() * excuses.length)];
+            }
+            
+            // Verificar seguridad de IP
+            function checkIPSecurity() {
+                const ipModal = document.getElementById('ip-modal');
+                const statusIcon = document.getElementById('status-icon');
+                const statusText = document.getElementById('ip-status-text');
+                const progress = document.getElementById('ip-progress');
+                const ipDetails = document.getElementById('ip-details');
+                const closeBtn = document.getElementById('close-ip-modal');
+                
+                // Reiniciar estado
+                statusIcon.className = 'status-icon checking';
+                statusText.textContent = 'Comprobando si tu conexión es segura...';
+                progress.style.width = '0%';
+                ipDetails.textContent = '';
+                closeBtn.classList.add('hidden');
+                
+                // Mostrar modal
+                ipModal.classList.add('show');
+                
+                // Simulación de progreso
+                let progressValue = 0;
+                const progressInterval = setInterval(() => {
+                    progressValue += Math.random() * 15;
+                    if (progressValue >= 100) {
+                        progressValue = 100;
+                        clearInterval(progressInterval);
+                        
+                        // Completado
+                        setTimeout(() => {
+                            statusIcon.className = 'status-icon secure';
+                            statusText.textContent = '¡Conexión segura establecida!';
+                            ipDetails.innerHTML = `
+                                <strong>Información de seguridad:</strong><br>
+                                - Conexión: Encriptada (AES-256)<br>
+                                - Enrutamiento: A través de 7 nodos internacionales<br>
+                                - Ubicación aparente: Dublín, Irlanda 🇮🇪<br>
+                                - Estado: Indetectable por autoridades<br>
+                                - Nivel de seguridad: Máximo
+                            `;
+                            closeBtn.classList.remove('hidden');
+                        }, 500);
+                    }
+                    progress.style.width = `${progressValue}%`;
+                }, 200);
+            }
+            
+            // Mostrar certificado
+            function showCertificate() {
+                const certificateModal = document.getElementById('certificate-modal');
+                const certificateName = document.getElementById('certificate-name');
+                
+                // Obtener nombre si existe
+                const nameInput = document.getElementById('name');
+                if (nameInput.value.trim()) {
+                    certificateName.textContent = nameInput.value.trim().toUpperCase();
+                } else {
+                    certificateName.textContent = "REBELDE ANÓNIMO";
+                }
+                
+                // Mostrar modal
+                certificateModal.classList.add('show');
             }
             
             // Hacer que el canvas de fuegos artificiales se ajuste al tamaño de la ventana
